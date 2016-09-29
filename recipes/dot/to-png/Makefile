@@ -21,7 +21,7 @@ clean:
 # Insert the install command here.
 # e.g. sudo apt-get install ffmpeg
 install-tools:
-	echo "No tools required"
+	sudo apt-get install graphviz
 
 # Use this target when one file requires another.
 # See "../../cue/split/Makefile" for an example.
