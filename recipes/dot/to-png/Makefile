@@ -3,6 +3,12 @@
 #     width = 200
 # and be referenced in the command as $(width)
 
+# Press <f5> (mis-save-and-compile) to run this makefile (i.e. apply the transformation).
+# Then in the corresponding dired buffer press one of:
+# C-, (mis-finalize)  : finalize the transformation (delete makefile and other auxiliary files).
+# C-M-. (mis-replace) : to clean up (delete auxiliary files and original file).
+# C-M-, (mis-abort)   : revert back to state before `mis-action' was called.
+
 # ______________________________________________________________________________
 
 DIRDOT = $(shell dir *.dot)

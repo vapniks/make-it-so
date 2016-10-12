@@ -188,6 +188,11 @@ Jump to the Makefile of the selected recipe."
                            "# Parameters should go in the upper half as:\n"
                            "#     width = 200\n"
                            "# and be referenced in the command as $(width)\n\n"
+			   "# Press " mis-make-key " (mis-save-and-compile) to run this makefile (i.e. apply the transformation).\n"
+			   "# Then in the corresponding dired buffer press one of:\n"
+			   "# " (cdr (assoc 'mis-finalize mis-bindings-alist)) " (mis-finalize) : finalize the transformation (delete makefile and other auxiliary files).\n"
+			   "# " (cdr (assoc 'mis-replace mis-bindings-alist)) " (mis-replace)  : to clean up (delete auxiliary files and original file).\n"
+			   "# " (cdr (assoc 'mis-abort mis-bindings-alist)) " (mis-abort)   : revert back to state before `mis-action' was called.\n\n"
                            "# " (make-string 78 ?_)))
          (olds (format "DIR%s = $(shell dir *.%s)" (upcase olde) olde))
          (news (format "DIR%s = $(DIR%s:.%s=.%s)"
