@@ -115,6 +115,15 @@ Option -j8 will allow up to 8 asynchronous processes to make the targets."
   "`mis-make-command' will be bound to this key in `makefile-mode'."
   :group 'make-it-so)
 
+(defcustom mis-makefile-preamble "# This is a template for the Makefile.
+# Parameters should go in the upper half as:
+#     width = 200
+# and be referenced in the command as $(width)
+
+# "
+  "Preamble to be inserted at the top of makefile templates."
+  :group 'make-it-so)
+
 ;;* Setup
 (defvar mis-mode-map
   (make-sparse-keymap))
@@ -184,16 +193,7 @@ Jump to the Makefile of the selected recipe."
          (newe (if (string-match "^to-\\(.*\\)" action)
                    (match-string 1 action)
                  (concat "out." olde)))
-         (preamble (concat "# This is a template for the Makefile.\n"
-                           "# Parameters should go in the upper half as:\n"
-                           "#     width = 200\n"
-                           "# and be referenced in the command as $(width)\n\n"
-			   "# Press " mis-make-key " (mis-save-and-compile) to run this makefile (i.e. apply the transformation).\n"
-			   "# Then in the corresponding dired buffer press one of:\n"
-			   "# " (cdr (assoc 'mis-finalize mis-bindings-alist)) " (mis-finalize) : finalize the transformation (delete makefile and other auxiliary files).\n"
-			   "# " (cdr (assoc 'mis-replace mis-bindings-alist)) " (mis-replace)  : to clean up (delete auxiliary files and original file).\n"
-			   "# " (cdr (assoc 'mis-abort mis-bindings-alist)) " (mis-abort)   : revert back to state before `mis-action' was called.\n\n"
-                           "# " (make-string 78 ?_)))
+         (preamble (concat mis-makefile-preamble (make-string 78 ?_)))
          (olds (format "DIR%s = $(shell dir *.%s)" (upcase olde) olde))
          (news (format "DIR%s = $(DIR%s:.%s=.%s)"
                        (upcase newe) (upcase olde) olde newe))
