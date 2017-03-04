@@ -122,6 +122,7 @@ Option -j8 will allow up to 8 asynchronous processes to make the targets."
 
 # "
   "Preamble to be inserted at the top of makefile templates."
+  :type 'string
   :group 'make-it-so)
 
 ;;* Setup
